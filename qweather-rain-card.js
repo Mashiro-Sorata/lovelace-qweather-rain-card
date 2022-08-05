@@ -149,10 +149,10 @@ class RainCard extends HTMLElement {
 							scaleInstance.ticksAsNumbers[scaleInstance.ticksAsNumbers.length - 1] = null;
 						},
 						ticks: {
-							suggestedMax: 10.0,
-							suggestedMin: 5.0,
+							suggestedMax: 2,
+							suggestedMin: 0.1,
 							beginAtZero: true,
-							stepSize: 1,
+							// stepSize: 0.5,
 							mirror: true,
 						}
 					}]
@@ -240,7 +240,7 @@ class RainCard extends HTMLElement {
 		xhr.open("GET", "https://devapi.qweather.com/v7/minutely/5m?location=" + this.long + "," + this.lat + "&key=" + this.qweather_key);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-				// 	    console.log(xhr.response);
+				// console.log(xhr.response);
 				_this.decodeJSON(JSON.parse(xhr.response));
 				
 			}
@@ -251,7 +251,6 @@ class RainCard extends HTMLElement {
 
 	decodeJSON(obj) {
 
-		// 		console.log('Decode String');
 		if (obj.code !== "200")
 			return;
 
@@ -275,16 +274,6 @@ class RainCard extends HTMLElement {
 					}]
 				}
 				this.chart.update();
-
-		
-// 			if(this.chart.data.labels != this.time){
-/*
-				this.chart.data.labels = this.time;
-				this.chart.data.datasets[0].data = this.rainfall;
-				this.chart.update();
-*/
-// 			}
-
 	}
 
 
